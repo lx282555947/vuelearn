@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-bing</title>
+    <script src="../resource/vue.js"></script>
+    <style>
+        .isRed{
+            color: red;
+        }
+        .isBlue{
+            color:blue;
+        }
+    </style>
+</head>
+<body>
+<div id='app'>
+    <a :href="url">百度</a>
+    <a v-bind:href="url">百度</a>
+<!--    动态绑定  对象语法-->
+    <div :class="{isRed:isRed}">我是什么颜色</div>
+    <button @click="change()">点击</button>
+</div>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            url: 'http://www.baidu.com',
+            isRed:true
+        },
+        methods:{
+            change:function(){
+                this.isRed = !this.isRed;
+            }
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue初体验</title>
+    <script src="resource/vue.js"></script>
+    <style>
+        .isRed{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h3>{{message}}</h3>
+        <ul>
+            <li v-for="(item, index) in movies" @click="change(index)" :class="getColor(index)">{{item}}</li>
+        </ul>
+    </div>
+    <script>
+        const app = new Vue({
+            el:'#app',
+            data:{
+                message: 'hello,world',
+                movies:['大话西游','盗梦空间'],
+                status:[
+                    {
+                        isRed: true
+                    },
+                    {
+                        isRed: false
+                    },
+                    {
+                        isRed: false
+                    },
+                    {
+                        isRed: false
+                    },
+                ]
+            },
+            methods:{
+                getColor:function(index){
+                    return this.status[index]
+                },
+                change:function (index) {
+                    console.log('call');
+                    this.status[index].isRed = !this.status[index].isRed;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

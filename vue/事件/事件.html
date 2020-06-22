@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件</title>
+    <script src="../resource/vue.js"></script>
+</head>
+<body>
+<div id='app'>
+<!--    不加括号，默认传递事件参数-->
+    <button @click="btn1change">按钮</button>
+<!--    如果要传参数和事件对象，事件对象放在最后一个，并且要加$-->
+    <button @click="btn2change(1,$event)">按钮</button>
+</div>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {},
+        methods:{
+            btn1change(event){
+                console.log(event.target.innerText);
+            },
+            btn2change(a, event) {
+                console.log(a, event.target.innerText);
+            }
+        }
+    })
+</script>
+</body>
+</html>

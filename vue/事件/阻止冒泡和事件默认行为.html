@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>阻止冒泡和事件默认行为</title>
+    <script src="../resource/vue.js"></script>
+</head>
+<body>
+<div id='app'>
+    <div @click="father">
+        <button @click="son">儿子</button>
+    </div>
+<!--    点击son会触发son以及father的点击时间，为了阻止father的点击事件，可添加stop-->
+    <div @click="father">
+        <button @click.stop="son">儿子</button>
+    </div>
+
+    <form action="http://www.baidu.com">
+        <input type="submit" value="提交">
+    </form>
+<!--    为了阻止提交事件自动触发，可添加prevent-->
+    <form action="http://www.baidu.com">
+        <input type="submit" value="提交" @click.prevent="submit">
+    </form>
+<!--    键盘事件-->
+    <input type="text" @keyup.enter="enter" value="输入">
+</div>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {},
+        methods:{
+            father(){
+                console.log('father');
+            },
+            son(){
+                console.log('son');
+            },
+            submit(){
+                console.log('提交');
+            },
+            enter(event){
+                console.log('输入：' + event.target.value);
+            }
+        }
+    })
+</script>
+</body>
+</html>
