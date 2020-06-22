@@ -24,6 +24,7 @@
     </form>
 <!--    键盘事件-->
     <input type="text" @keyup.enter="enter" value="输入">
+    <button @click.once="once">只能触发一次</button>
 </div>
 <script>
     const app = new Vue({
@@ -41,6 +42,9 @@
             },
             enter(event){
                 console.log('输入：' + event.target.value);
+            },
+            once(){
+                console.log('就这么一次');
             }
         }
     })
