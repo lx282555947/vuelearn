@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>子访问父</title>
+    <script src="../resource/vue.js"></script>
+</head>
+<body>
+<div id='app'>
+    <cpn></cpn>
+</div>
+
+<template id="tem">
+    <div>
+        <h3>我是张三，哈哈哈</h3>
+        <button @click="accessFieldFromFather">从父亲获取属性</button>
+        <button @click="accessFunctionFromFather">从父亲获取方法</button>
+    </div>
+</template>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            name: 'father'
+        },
+        methods: {
+            showMessage() {
+                console.log('I am father');
+            }
+        },
+        components: {
+            cpn: {
+                template: '#tem',
+                methods: {
+                    accessFieldFromFather() {
+                        console.log(this.$parent.name);
+                    },
+                    accessFunctionFromFather() {
+                        this.$parent.showMessage();
+                    }
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>component</title>
+    <script src="../resource/vue.js"></script>
+</head>
+<body>
+<div id='app'>
+    <cpn></cpn>
+</div>
+<script>
+    // 创建组件的三个基本步骤：
+    // 1、创建基本组件
+    // 2、注册组件
+    // 3、使用组件
+
+    //------------创建组件--------------------
+    const component = Vue.extend({
+        template: `<div>
+                    <h3>我是张三，哈哈哈哈哈哈哈</h3>
+                    <h3>我是王五，哈哈哈哈哈哈哈</h3>
+                    <h3>我是赵六，哈哈哈哈哈哈哈</h3>
+                  </div>`
+    });
+    //------------注册组件，该定义方式是全局组件--------------------
+    Vue.component('cpn', component);
+    const app = new Vue({
+        el: '#app',
+        data: {},
+    })
+</script>
+</body>
+</html>

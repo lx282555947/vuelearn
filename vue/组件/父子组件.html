@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>父子组件</title>
+    <script src="../resource/vue.js"></script>
+</head>
+<body>
+<div id='app'>
+    <cpn></cpn>
+</div>
+
+
+<template id="son">
+    <div>
+        <h3>我是儿子</h3>
+        <h3>我是张三，哈哈哈哈</h3>
+    </div>
+</template>
+
+<template id="father">
+    <div>
+        <h3>我是爸爸</h3>
+        <h3>这是我儿子：</h3>
+        <son></son>
+    </div>
+</template>
+<script>
+    const son = Vue.extend({
+        template: `#son`
+    });
+
+    // const father = Vue.extend({
+    //     template: `#father`,
+    //     components:{
+    //         son: son
+    //     }
+    // });
+
+    const app = new Vue({
+        el: '#app',
+        data: {},
+        components:{
+            // 组件语法糖
+            cpn: {
+                template: `#father`,
+                components:{
+                    son: son
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

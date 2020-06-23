@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>父访问子</title>
+    <script src="../resource/vue.js"></script>
+</head>
+<body>
+<div id='app'>
+    <cpn ref="first"></cpn>
+    <cpn></cpn>
+    <cpn></cpn>
+    <button @click="accessFieldFromSon">访问子组件中的属性</button>
+    <button @click="accessFunctionFromSon">访问子组件中的方法</button>
+    <button @click="accessRefFromSon">访问特定ref子组件中的方法</button>
+</div>
+
+<template id="tem">
+    <div>
+        <h3>{{son}}</h3>
+    </div>
+</template>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {},
+        methods:{
+            accessFieldFromSon(){
+                console.log(this.$children[0].son);
+            },
+            accessFunctionFromSon(){
+                this.$children[0].showMessage();
+            },
+            accessRefFromSon(){
+                console.log(this.$refs.first);
+                this.$refs.first.showMessage();
+            }
+        },
+        components: {
+            cpn: {
+                template: '#tem',
+                data() {
+                    return {
+                        son: 'son1',
+                        message: 'I am son'
+                    }
+                },
+                methods:{
+                    showMessage(){
+                        console.log(this.message);
+                    }
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

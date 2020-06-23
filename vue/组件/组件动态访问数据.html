@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件访问vue实例中的数据</title>
+    <script src="../resource/vue.js"></script>
+</head>
+<body>
+<div id='app'>
+    <cpn></cpn>
+</div>
+
+<template id="tem">
+    <div>
+        <h3>我是{{name}}，我的工号是:{{count}}</h3>
+        <button @click="increase">+</button>
+        <button @click="decrease">-</button>
+    </div>
+</template>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            name:'张三'
+        },
+        components:{
+            cpn:{
+                template:`#tem`,
+                data(){
+                    return {
+                        name: '张三',
+                        count: 0
+                    }
+                },
+                methods:{
+                    increase(){
+                        this.count++;
+                    },
+                    decrease(){
+                        this.count--;
+                    }
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

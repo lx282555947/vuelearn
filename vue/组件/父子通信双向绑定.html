@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>父子通信双向绑定</title>
+    <script src="../resource/vue.js"></script>
+</head>
+<body>
+<div id='app'>
+    <cpn :snum1="fnum1" :snum2="fnum2" @changefromson="changeself"></cpn>
+</div>
+
+<template id="tem">
+    <div>
+        <h3>son num1:{{snum1}}</h3>
+        <h3>son dnum1:{{sdnum1}}</h3>
+        <input type="text" :bind="sdnum1" @input="numChange">
+        <h3>son num2:{{snum2}}</h3>
+    </div>
+</template>
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {
+            fnum1: 100,
+            fnum2: 200
+        },
+        methods:{
+            changeself(sdnum1){
+                console.log(sdnum1);
+                this.fnum1 = sdnum1;
+            }
+        },
+        components: {
+            cpn: {
+                template: '#tem',
+                data() {
+                    return {
+                        sdnum1: this.snum1,
+                        sdnum2: this.snum2
+                    }
+                },
+                props: {
+                    snum1: {
+                        type: Number,
+                        required: true
+                    },
+                    snum2: {
+                        type: Number,
+                        required: true
+                    }
+                },
+                methods:{
+                    numChange(event){
+                        this.sdnum1 = parseFloat(event.target.value);
+                        this.$emit('changefromson', this.sdnum1);
+                    }
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>
