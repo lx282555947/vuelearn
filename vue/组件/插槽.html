@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../resource/vue.js"></script>
+</head>
+<body>
+<div id='app'>
+    <!--    可以是文本-->
+    <cpn>myprofile</cpn>
+    <!--    也可以是html标签-->
+    <h3>---------cnp-------------</h3>
+    <cpn>
+        <button>按钮</button>
+    </cpn>
+    <!--    也可以是组件-->
+    <h3>---------cnp2-------------</h3>
+    <cpn>
+        <cpn2></cpn2>
+    </cpn>
+    <!--    如果有多个插槽，在不给slot名字的情况下，会将所有插槽代替成为传入的内容-->
+    <h3>---------cnp3-------------</h3>
+    <cpn3>
+        <h3>我是头</h3>
+        <h3>我是脚</h3>
+    </cpn3>
+    <h3>-----------cpn4-----------</h3>
+    <!--    为了解决这个问题，可以给slot添加name属性-->
+    <!--    任何没有被包裹在带有 v-slot 的 <template> 中的内容都会被视为默认插槽的内容。-->
+    <cpn4>
+        <template v-slot:header>
+            <h1>Here might be a page title</h1>
+        </template>
+
+        <p>A paragraph for the main content.</p>
+        <p>And another one.</p>
+
+        <template v-slot:footer>
+            <p>Here's some contact info</p>
+        </template>
+    </cpn4>
+    <!--    为了能够在父组件中使用子组件中的数据，可以将数据绑定-->
+    <h3>-----------cnp5------------</h3>
+    <cpn5>
+        <template v-slot:header>
+            <h3>我是头</h3>
+        </template>
+        <template v-slot:content="slot">
+            <ul>
+                <li v-for="movie in slot.data.movies">{{movie}}</li>
+            </ul>
+        </template>
+        <template v-slot:footer>
+            <h3>我是脚</h3>
+        </template>
+    </cpn5>
+</div>
+
+<template id="tem">
+    <div>
+        <h3>我是张三，哈哈哈哈</h3>
+        <slot></slot>
+    </div>
+</template>
+
+<template id="cpn3">
+    <div>
+        <header>
+            <!-- 我们希望把页头放这里 -->
+            <slot></slot>
+        </header>
+        <main>
+            <!-- 我们希望把主要内容放这里 -->
+        </main>
+        <footer>
+            <!-- 我们希望把页脚放这里 -->
+            <slot></slot>
+        </footer>
+    </div>
+</template>
+
+<template id="cpn4">
+    <div>
+        <header>
+            <!-- 我们希望把页头放这里 -->
+            <slot name="header"></slot>
+        </header>
+        <main>
+            <!-- 我们希望把主要内容放这里 -->
+            <slot></slot>
+        </main>
+        <footer>
+            <!-- 我们希望把页脚放这里 -->
+            <slot name="footer"></slot>
+        </footer>
+    </div>
+</template>
+
+<template id="cpn5">
+    <div>
+        <header>
+            <!-- 我们希望把页头放这里 -->
+            <slot name="header"></slot>
+        </header>
+        <div>
+<!--             我们希望把主要内容放这里 -->
+            <slot name="content" :data="user"></slot>
+        </div>
+        <footer>
+            <!-- 我们希望把页脚放这里 -->
+            <slot name="footer"></slot>
+        </footer>
+    </div>
+</template>
+
+<script>
+    const app = new Vue({
+        el: '#app',
+        data: {},
+        components: {
+            cpn: {
+                template: '#tem'
+            },
+            cpn2: {
+                template: `<div><h3>我是另一个组件</h3></div>`
+            },
+            cpn3: {
+                template: '#cpn3'
+            },
+            cpn4: {
+                template: '#cpn4'
+            },
+            cpn5: {
+                template: '#cpn5',
+                data() {
+                    return {
+                        user: {
+                            name: '张三',
+                            movies: ['海贼王', '海绵宝宝', '海王']
+                        }
+                    }
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>
