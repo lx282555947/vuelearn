@@ -1,6 +1,7 @@
 // 配置webpack 打包数据源和打包后的输出路径
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const UglifyWebpackPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
     entry: './src/main.js',
@@ -41,6 +42,7 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: 'index.html'
-        })
+        }),
+        new UglifyWebpackPlugin()
     ]
 }
