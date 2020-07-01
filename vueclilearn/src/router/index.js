@@ -27,27 +27,53 @@ const routes = [
     {
         path: '/home',
         component: home,
+        meta:{
+            title:'首页'
+        },
         children:[
             {
+                path: '',
+                redirect: '/home/name'
+            },
+            {
                 path: '/home/name',
-                component: homeName
+                meta:{
+                    title:'新闻'
+                },
+                component: homeName,
+                beforeEnter: (to, from, next) => {
+                    console.log('beforeEnrter');
+                    next();
+                }
             },
             {
                 path: '/home/message',
+                meta:{
+                    title:'信息'
+                },
                 component: homeMessage
             }
         ]
     },
     {
         path: '/about',
+        meta:{
+            title:'关于'
+        },
         component: about
     },
     {
         path: '/user/:userId',
+        meta:{
+            title:'用户'
+        },
         component: user
     },
     {
         path: '/profile',
+        meta:{
+            title:'我的'
+        },
         component: profile
     }
 ]
@@ -58,4 +84,12 @@ const router = new VueRouter({
     routes,
     mode: 'history'
 });
+
+
+// 在路由前更改窗口的标题
+router.beforeEach((to,from,next)=>{
+    document.title = to.meta.title;
+    next();
+})
+
 export default router;
