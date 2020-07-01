@@ -1,12 +1,6 @@
 <template>
     <div class="tab-bar">
-        <div class="tab-bar-item">
-            <div class="item1"></div>
-            <div>首页</div>
-        </div>
-        <div class="tab-bar-item">分类</div>
-        <div class="tab-bar-item">购物车</div>
-        <div class="tab-bar-item">我的</div>
+        <slot></slot>
     </div>
 </template>
 
@@ -24,14 +18,9 @@
         left: 0px;
         bottom: 0px;
         right: 0px;
-        box-shadow: 0px -1px 1px 1px black;
+        box-shadow: 0px -0.5px 1px rgba(0, 0, 0, .01);
+        font-size: 14px;
     }
-    .tab-bar-item {
-        flex: 1;
-        height: 49px;
-        text-align: center;
-    }
-    .item1 {
-        background: transparent url("../assets/img/home.png") no-repeat fixed center;
-    }
+
+
 </style>
