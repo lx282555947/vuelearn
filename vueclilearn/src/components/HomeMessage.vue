@@ -15,7 +15,10 @@
 
 <script>
     export default {
-        name: "HomeMessage"
+        name: "HomeMessage",
+        created() {
+            console.log('message created');
+        }
     }
 </script>
 

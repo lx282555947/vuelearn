@@ -4,7 +4,13 @@
 
 <script>
     export default {
-        name: "About"
+        name: "About",
+        created(){
+            console.log('关于created');
+        },
+        activated() {
+            console.log('关于activated');
+        }
     }
 </script>
 
