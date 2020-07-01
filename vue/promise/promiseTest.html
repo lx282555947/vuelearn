@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>promise</title>
+</head>
+<body>
+    <script>
+        new Promise((resolve,reject)=>{
+            setTimeout(()=>{
+                resolve('hello,world');
+                reject('error');
+            }, 5000);
+        }).then((data)=>{
+            console.log(data);
+            return new Promise(resolve => {
+                resolve(data + '2222');
+            })
+        }).then(data=>{
+            console.log(data);
+            return Promise.resolve(data + '3333');
+        }).then(data=>{
+            console.log(data);
+            return data + '4444';
+        }).then(data=>{
+            console.log(data);
+        }).catch(err=>{
+            console.log('error');
+        }).finally(()=>{
+            console.log('finished');
+        })
+    </script>
+</body>
+</html>
