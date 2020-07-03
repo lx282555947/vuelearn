@@ -7,13 +7,12 @@ new Vue({
   render: h => h(App),
 }).$mount('#app')
 
-import axios from 'axios';
+import {request} from './network/request';
 
-axios({
-  url:'http://localhost:7020/tartan/solver/test/info',
-  params:{
-    name: 'zhangsan'
-  }
+request({
+  url:'/home/multidata'
 }).then((res)=>{
-  console.log('请求完成:',res);
+  console.log('调用接口成功:', res);
+}).catch(()=>{
+  console.log('调用接口异常')
 })
