@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>监听器test</title>
+    <script src="../resource/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model.lazy="username">
+    <h3>{{username}}</h3>
+</div>
+<script>
+    const vue = new Vue({
+        el: '#app',
+        data: {
+            username: "zhangsan"
+        },
+        watch: {
+            username(val) {
+                console.log(val);
+                this.username = this.username.toUpperCase();
+            }
+        }
+    });
+</script>
+</body>
+</html>

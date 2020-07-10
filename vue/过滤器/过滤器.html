@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>过滤器</title>
+    <script src="../resource/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h3>{{username}}</h3>
+    <h3>{{username | upper}}</h3>
+</div>
+<script>
+    const vue = new Vue({
+        el: '#app',
+        data: {
+            username: 'zhangsan'
+        },
+        filters: {
+            upper(val) {
+                return val.toUpperCase();
+            }
+        }
+    })
+</script>
+</body>
+</html>
